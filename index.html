@@ -15,11 +15,16 @@
         <p class="subtitle animate-fadeIn delay-200">Our Beautiful Journey</p>
     </header>
 
-    <div class="text-center mb-12 scroll-fade">
-    <button class="music-btn" onclick="toggleMusic()">Play our song little precious 💙</button>
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <div class="center-card card">
+  <h3>Choose a Song:</h3>
+  <select id="songSelector" class="music-btn" title="Choose a song to play">
+    <option value="music.mp3">Song 1</option>
+    <option value="a.mp3">Song 2</option>
+  </select>
+  <audio id="audioPlayer" controls style="margin-top: 1rem; width: 100%;">
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 </div>
 
 
@@ -124,6 +129,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
