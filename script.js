@@ -2,7 +2,7 @@
 
 // Simple password protection
 (function() {
-    const password = "2512026"; // set your password here
+    const password = "25122025"; // set your password here
     const userInput = prompt("Enter password to access our page 💙:");
     if(userInput !== password) {
         alert("Incorrect password! Goodbye 💔");
@@ -13,7 +13,7 @@
 
 
 function updateEngagementCounter() {
-    const engagementDate = new Date("2026-01-25T19:00:00");
+    const engagementDate = new Date("2025-12-25T19:00:00");
     const now = new Date();
     const diff = now - engagementDate;
 
@@ -73,3 +73,4 @@ function toggleMusic() {
         music.pause();
     }
 }
+
