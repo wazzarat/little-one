@@ -10,6 +10,11 @@
     }
 })();
 
+window.addEventListener("load", function() {
+    setTimeout(() => {
+        alert("Happy Valentine’s Day nada'm 💙 my Forever .");
+    }, 1500);
+});
 
 
 function updateEngagementCounter() {
@@ -73,7 +78,6 @@ function toggleMusic() {
         music.pause();
     }
 }
-
 
 // Song Selector
 const selector = document.getElementById('songSelector');
