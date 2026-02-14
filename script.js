@@ -10,11 +10,6 @@
     }
 })();
 
-window.addEventListener("load", function() {
-    setTimeout(() => {
-        alert("Happy Valentine’s Day nada'm 💙 my Forever .");
-    }, 1500);
-});
 
 
 function updateEngagementCounter() {
@@ -294,4 +289,5 @@ restartBtn.addEventListener("click", resetGame);
 // ------------------- Initialize -------------------
 createPuzzle();
 shuffle();
+
 
