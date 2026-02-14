@@ -140,7 +140,43 @@
         <div class="card center-card scroll-fade">
             <p id="letterText"></p>
         </div>
-    </section>
+    </section
+
+
+
+        <section class="section">
+    <div class="card center-card">
+        <h2>Unlock Our Memory 🧩</h2>
+
+        <div class="puzzle-info">
+            <span>Moves: <span id="moveCount">0</span></span>
+            <span>Time: <span id="timer">0</span>s</span>
+        </div>
+
+        <!-- Dropdown -->
+        <select id="photoSelect" class="photo-select">
+            <option value="photo1.jpg">Memory 1 💙</option>
+            <option value="photo2.jpg">Memory 2 💕</option>
+            <option value="photo3.jpg" disabled>Memory 3 🔒</option>
+            <option value="photo4.jpg" disabled>Memory 4 🔒</option>
+        </select>
+
+        <!-- Thumbnail previews -->
+        <div class="thumbnail-container">
+            <img src="ph1.jpg" class="thumb" data-img="photo1.jpg">
+            <img src="ph2.jpg" class="thumb" data-img="photo2.jpg">
+            <img src="ph3.jpg" class="thumb locked" data-img="photo3.jpg">
+            <img src="ph4.jpg" class="thumb locked" data-img="photo4.jpg">
+        </div>
+
+        <div class="puzzle-container" id="puzzle"></div>
+
+        <button id="restartBtn" class="restart-btn">Restart</button>
+
+        <p id="puzzleMessage" class="secret-message"></p>
+    </div>
+</section>
+
 
     <!-- Music Button -->
     <div class="text-center mb-12 scroll-fade">
@@ -153,6 +189,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
