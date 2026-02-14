@@ -87,15 +87,14 @@ selector.addEventListener('change', () => {
     player.src = selector.value;
     player.play();
 });
-
-const main-title = document.getElementById("main-title");
+const title = document.getElementById("loveTitle");
 const secret = document.getElementById("secretMessage");
 
 const message = "You are the best thing that ever happened to me. I choose you. Always. 💙";
 
 let typing = false;
 
-main-title.addEventListener("click", function () {
+title.addEventListener("click", function () {
 
     if (typing) return;
 
@@ -111,17 +110,8 @@ main-title.addEventListener("click", function () {
             setTimeout(typeWriter, 50);
         } else {
             typing = false;
-
-            // Add glow effect when finished
-            document.body.classList.add("glow");
-
-            setTimeout(() => {
-                document.body.classList.remove("glow");
-            }, 2000);
         }
     }
 
     typeWriter();
 });
-
-
