@@ -1,15 +1,33 @@
+/* =========================
+   Simple Password Protection
+========================= */
 
-// Simple password protection
-(function() {
+(function () {
     const password = "25122025"; // set your password here
     const userInput = prompt("Enter password to access our page 💙:");
-    if(userInput !== password) {
+
+    if (userInput !== password) {
         alert("Incorrect password! Goodbye 💔");
-        document.body.innerHTML = "<h1 style='text-align:center; margin-top:50px; color:red;'>Access Denied 💔</h1>";
+        document.body.innerHTML =
+            "<h1 style='text-align:center; margin-top:50px; color:red;'>Access Denied 💔</h1>";
     }
 })();
 
 
+/* =========================
+   Valentine Alert
+========================= */
+
+window.addEventListener("load", function () {
+    setTimeout(() => {
+        alert("Happy Valentine’s Day nada'm 💙 my Forever .");
+    }, 1500);
+});
+
+
+/* =========================
+   Engagement Counter
+========================= */
 
 function updateEngagementCounter() {
     const engagementDate = new Date("2025-12-25T19:00:00");
@@ -24,48 +42,40 @@ function updateEngagementCounter() {
     document.getElementById("engagementCounter").textContent =
         `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
+
 setInterval(updateEngagementCounter, 1000);
 updateEngagementCounter();
 
-// Open When Letters
+
+/* =========================
+   Open When Letters
+========================= */
+
 function openLetter(type) {
     const letterText = document.getElementById("letterText");
-    if(type === 'sad') {
-        letterText.textContent = "Don't be sad, my love 💙 I'm always with you!";
-    } else if(type === 'miss') {
-        letterText.textContent = "I miss you too 💙 Counting every moment until we meet!";
-    } else if(type === 'happy') {
-        letterText.textContent = "Yay! Keep smiling 💙 You make me happiest!";
+
+    if (type === "sad") {
+        letterText.textContent =
+            "Don't be sad, my love 💙 I'm always with you!";
+    } 
+    else if (type === "miss") {
+        letterText.textContent =
+            "I miss you too 💙 Counting every moment until we meet!";
+    } 
+    else if (type === "happy") {
+        letterText.textContent =
+            "Yay! Keep smiling 💙 You make me happiest!";
     }
 }
 
-// Music Toggle
-function toggleMusic() {
-    const music = document.getElementById("bgMusic");
-    if(music.paused) {
-        music.play();
-    } else {
-        music.pause();
-    }
-}
 
-// Scroll Fade-in Effect
-function scrollFade() {
-    const elements = document.querySelectorAll('.scroll-fade');
-    const windowHeight = window.innerHeight;
-    elements.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if(elementTop < windowHeight - 100) {
-            el.classList.add('show');
-        }
-    });
-}
-window.addEventListener('scroll', scrollFade);
-window.addEventListener('load', scrollFade);
-
+/* =========================
+   Music Toggle
+========================= */
 
 function toggleMusic() {
     const music = document.getElementById("bgMusic");
+
     if (music.paused) {
         music.play();
     } else {
@@ -74,44 +84,35 @@ function toggleMusic() {
 }
 
 
-// Song Selector
-const selector = document.getElementById('songSelector');
-const player = document.getElementById('audioPlayer');
+/* =========================
+   Scroll Fade-in Effect
+========================= */
 
-selector.addEventListener('change', () => {
+function scrollFade() {
+    const elements = document.querySelectorAll(".scroll-fade");
+    const windowHeight = window.innerHeight;
+
+    elements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight - 100) {
+            el.classList.add("show");
+        }
+    });
+}
+
+window.addEventListener("scroll", scrollFade);
+window.addEventListener("load", scrollFade);
+
+
+/* =========================
+   Song Selector
+========================= */
+
+const selector = document.getElementById("songSelector");
+const player = document.getElementById("audioPlayer");
+
+selector.addEventListener("change", () => {
     player.src = selector.value;
     player.play();
 });
-
----------------
-
-
-const title = document.getElementById("loveTitle");
-const secret = document.getElementById("secretMessage");
-
-const message = "You are the best thing that ever happened to me. I choose you. Always. 💙";
-
-let typing = false;
-
-title.addEventListener("click", function () {
-
-    if (typing) return;
-
-    secret.textContent = "";
-    typing = true;
-
-    let i = 0;
-
-    function typeWriter() {
-        if (i < message.length) {
-            secret.textContent += message.charAt(i);
-            i++;
-            setTimeout(typeWriter, 50);
-        } else {
-            typing = false;
-        }
-    }
-
-    typeWriter();
-});
-
