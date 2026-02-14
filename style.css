@@ -106,6 +106,14 @@ body {
     margin-top: 0.5rem;
 }
 
+.secret-message {
+    opacity: 1;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #e11d48;
+    min-height: 30px;
+}
+
 
 
 
