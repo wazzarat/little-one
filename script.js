@@ -126,7 +126,7 @@ const photoSelect = document.getElementById("photoSelect");
 const thumbs = document.querySelectorAll(".thumb");
 
 const size = 3;
-let images = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg"];
+let images = ["ph1.jpg", "ph2.jpg", "ph3.jpg", "photo1.jpg"];
 let image = images[Math.floor(Math.random() * 2)]; // random start from first 2
 
 let tiles = [];
