@@ -87,3 +87,39 @@ selector.addEventListener('change', () => {
     player.src = selector.value;
     player.play();
 });
+
+const title = document.getElementById("loveTitle");
+const secret = document.getElementById("secretMessage");
+
+const message = "You are the best thing that ever happened to me. I choose you. Always. 💙";
+
+let typing = false;
+
+title.addEventListener("click", function () {
+
+    if (typing) return;
+
+    secret.textContent = "";
+    typing = true;
+
+    let i = 0;
+
+    function typeWriter() {
+        if (i < message.length) {
+            secret.textContent += message.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+        } else {
+            typing = false;
+
+            // Add glow effect when finished
+            document.body.classList.add("glow");
+
+            setTimeout(() => {
+                document.body.classList.remove("glow");
+            }, 2000);
+        }
+    }
+
+    typeWriter();
+});
