@@ -1,7 +1,4 @@
 
-
-// Engagement Counter
-
 // Simple password protection
 (function() {
     const password = "25122025"; // set your password here
@@ -117,3 +114,4 @@ title.addEventListener("click", function () {
 
     typeWriter();
 });
+
