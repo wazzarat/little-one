@@ -105,50 +105,141 @@ body {
     margin-top: 0.5rem;
 }
 
-.puzzle-section {
-    padding: 80px 20px;
+/* ===============================
+   PAGE BACKGROUND
+================================= */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fbeaff, #e0f7ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+/* ===============================
+   MAIN CARD CONTAINER
+================================= */
+.puzzle-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    width: 420px;
     text-align: center;
-    color: white;
+    transition: 0.3s ease;
 }
 
+.puzzle-card:hover {
+    transform: translateY(-5px);
+}
+
+
+/* ===============================
+   TITLE
+================================= */
 .puzzle-title {
-    font-size: 32px;
-    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #6b3fa0;
 }
 
-#imageSelector {
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
 
+/* ===============================
+   PUZZLE BOARD
+================================= */
 #puzzleBoard {
     width: 360px;
     height: 360px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
+    gap: 4px;
     margin: 20px auto;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .tile {
     width: 120px;
     height: 120px;
     background-size: 360px 360px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tile:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .empty {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.3);
     cursor: default;
 }
 
-#confettiCanvas {
-    position: fixed;
-    pointer-events: none;
-    top: 0;
-    left: 0;
+
+/* ===============================
+   CONTROLS
+================================= */
+.puzzle-controls {
+    margin-top: 15px;
+}
+
+.puzzle-controls select,
+.puzzle-controls button {
+    padding: 8px 14px;
+    margin: 6px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.puzzle-controls select {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.puzzle-controls button {
+    background: linear-gradient(135deg, #b16cea, #ff6ec4);
+    color: white;
+    font-weight: 600;
+}
+
+.puzzle-controls button:hover {
+    transform: scale(1.05);
+}
+
+
+/* ===============================
+   MOVE + TIMER DISPLAY
+================================= */
+.puzzle-stats {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #444;
+}
+
+
+/* ===============================
+   WIN MESSAGE
+================================= */
+#winMessage {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d63384;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.4s ease;
+}
+
+#winMessage.show {
+    opacity: 1;
+    transform: translateY(0);
 }
