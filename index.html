@@ -127,23 +127,28 @@
         </audio>
     </div>
 
-<div id="puzzleBoard"></div>
+<div class="puzzle-card">
+    <div class="puzzle-title">Our Memory Puzzle 💙</div>
 
-<div class="puzzle-controls">
-    <select id="imageSelector">
-        <option value="ph1.jpg">Memory 1</option>
-        <option value="ph3.jpg">Memory 2</option>
-        <option value="ph2.jpg">Memory 3</option>
-    </select>
+    <div id="puzzleBoard"></div>
 
-    <button id="shuffleBtn">Shuffle</button>
-    <div>Moves: <span id="moveCounter">0</span></div>
-    <div>Time: <span id="timer">0</span>s</div>
+    <div class="puzzle-controls">
+        <select id="imageSelector">
+            <option value="ph1.jpg">Memory 1</option>
+            <option value="ph2.jpg">Memory 2</option>
+            <option value="ph3.jpg">Memory 3</option>
+        </select>
+
+        <button id="shuffleBtn">Shuffle</button>
+
+        <div class="puzzle-stats">
+            Moves: <span id="moveCounter">0</span> |
+            Time: <span id="timer">0</span>s
+        </div>
+    </div>
+
+    <div id="winMessage"></div>
 </div>
-
-<div id="winMessage"></div>
-<canvas id="confettiCanvas"></canvas>
-
 
     <script src="script.js"></script>
 </body>
