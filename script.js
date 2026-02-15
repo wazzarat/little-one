@@ -1,72 +1,71 @@
-// Engagement Counter
-
-// Simple password protection
+// ===============================
+// Simple Password Protection
+// ===============================
 (function() {
-    const password = "25122025"; // set your password here
+    const password = "25122025";
     const userInput = prompt("Enter password to access our page 💙:");
-    if(userInput !== password) {
+
+    if (userInput !== password) {
         alert("Incorrect password! Goodbye 💔");
-        document.body.innerHTML = "<h1 style='text-align:center; margin-top:50px; color:red;'>Access Denied 💔</h1>";
+        document.body.innerHTML =
+            "<h1 style='text-align:center; margin-top:50px; color:red;'>Access Denied 💔</h1>";
     }
 })();
 
 
-
+// ===============================
+// Engagement Counter
+// ===============================
 function updateEngagementCounter() {
     const engagementDate = new Date("2025-12-25T19:00:00");
     const now = new Date();
     const diff = now - engagementDate;
+
+    const counter = document.getElementById("engagementCounter");
+
+    if (!counter) return;
+
+    if (diff < 0) {
+        counter.textContent = "Counting down to our forever 💙";
+        return;
+    }
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
 
-    document.getElementById("engagementCounter").textContent =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    counter.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
+
 setInterval(updateEngagementCounter, 1000);
 updateEngagementCounter();
 
+
+// ===============================
 // Open When Letters
+// ===============================
 function openLetter(type) {
     const letterText = document.getElementById("letterText");
-    if(type === 'sad') {
+    if (!letterText) return;
+
+    if (type === "sad") {
         letterText.textContent = "Don't be sad, my love 💙 I'm always with you!";
-    } else if(type === 'miss') {
+    } else if (type === "miss") {
         letterText.textContent = "I miss you too 💙 Counting every moment until we meet!";
-    } else if(type === 'happy') {
+    } else if (type === "happy") {
         letterText.textContent = "Yay! Keep smiling 💙 You make me happiest!";
     }
 }
 
+
+// ===============================
 // Music Toggle
+// ===============================
 function toggleMusic() {
     const music = document.getElementById("bgMusic");
-    if(music.paused) {
-        music.play();
-    } else {
-        music.pause();
-    }
-}
+    if (!music) return;
 
-// Scroll Fade-in Effect
-function scrollFade() {
-    const elements = document.querySelectorAll('.scroll-fade');
-    const windowHeight = window.innerHeight;
-    elements.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if(elementTop < windowHeight - 100) {
-            el.classList.add('show');
-        }
-    });
-}
-window.addEventListener('scroll', scrollFade);
-window.addEventListener('load', scrollFade);
-
-
-function toggleMusic() {
-    const music = document.getElementById("bgMusic");
     if (music.paused) {
         music.play();
     } else {
@@ -75,27 +74,54 @@ function toggleMusic() {
 }
 
 
+// ===============================
 // Song Selector
-const selector = document.getElementById('songSelector');
-const player = document.getElementById('audioPlayer');
+// ===============================
+const songSelector = document.getElementById("songSelector");
+const audioPlayer = document.getElementById("audioPlayer");
 
-selector.addEventListener('change', () => {
-    player.src = selector.value;
-    player.play();
-});
+if (songSelector && audioPlayer) {
+    songSelector.addEventListener("change", () => {
+        audioPlayer.src = songSelector.value;
+        audioPlayer.play();
+    });
+}
 
-// the puzzle
 
+// ===============================
+// Scroll Fade Effect
+// ===============================
+function scrollFade() {
+    const elements = document.querySelectorAll(".scroll-fade");
+    const windowHeight = window.innerHeight;
+
+    elements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+            el.classList.add("show");
+        }
+    });
+}
+
+window.addEventListener("scroll", scrollFade);
+window.addEventListener("load", scrollFade);
+
+
+// ===============================
+// Puzzle
+// ===============================
 const board = document.getElementById("puzzleBoard");
-const selector = document.getElementById("imageSelector");
+const imageSelector = document.getElementById("imageSelector");
 const shuffleBtn = document.getElementById("shuffleBtn");
 const winMessage = document.getElementById("winMessage");
 
 let tiles = [];
 let emptyIndex = 8;
-let currentImage = selector.value;
+let currentImage = imageSelector ? imageSelector.value : "";
 
 function createBoard() {
+    if (!board) return;
+
     board.innerHTML = "";
     tiles = [];
 
@@ -123,7 +149,7 @@ function createBoard() {
     }
 
     emptyIndex = 8;
-    winMessage.textContent = "";
+    if (winMessage) winMessage.textContent = "";
 }
 
 function moveTile(e) {
@@ -134,7 +160,10 @@ function moveTile(e) {
         emptyIndex = index;
 
         if (checkWin()) {
-            winMessage.textContent = "You solved it 💙 Our memories always fit together.";
+            if (winMessage) {
+                winMessage.textContent =
+                    "You solved it 💙 Our memories always fit together.";
+            }
         }
     }
 }
@@ -163,11 +192,13 @@ function swapTiles(i1, i2) {
 function shuffle() {
     for (let i = 0; i < 100; i++) {
         const neighbors = getMovableTiles();
-        const randomIndex = neighbors[Math.floor(Math.random() * neighbors.length)];
+        const randomIndex =
+            neighbors[Math.floor(Math.random() * neighbors.length)];
         swapTiles(randomIndex, emptyIndex);
         emptyIndex = randomIndex;
     }
-    winMessage.textContent = "";
+
+    if (winMessage) winMessage.textContent = "";
 }
 
 function getMovableTiles() {
@@ -185,12 +216,15 @@ function checkWin() {
     return true;
 }
 
-selector.addEventListener("change", () => {
-    currentImage = selector.value;
-    createBoard();
-});
+if (imageSelector) {
+    imageSelector.addEventListener("change", () => {
+        currentImage = imageSelector.value;
+        createBoard();
+    });
+}
 
-shuffleBtn.addEventListener("click", shuffle);
+if (shuffleBtn) {
+    shuffleBtn.addEventListener("click", shuffle);
+}
 
 createBoard();
-
