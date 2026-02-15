@@ -192,7 +192,8 @@ function moveTile(index) {
 
         if (checkWin()) {
             stopTimer();
-            winMessage.textContent = "You solved it 💙 Perfect match!";
+winMessage.textContent = "🎉 Congratulations! You solved it perfectly 💙";
+winMessage.classList.add("show");
             launchConfetti();
         }
     }
