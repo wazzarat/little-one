@@ -85,22 +85,50 @@ selector.addEventListener('change', () => {
 });
 
 
-// ===============================
-// PUZZLE (Corrected Stable Version)
+
+     
+       // ===============================
+// ADVANCED PUZZLE GAME
 // ===============================
 
-const puzzleBoard = document.getElementById("puzzleBoard");
+const board = document.getElementById("puzzleBoard");
 const shuffleBtn = document.getElementById("shuffleBtn");
+const imageSelector = document.getElementById("imageSelector");
 const winMessage = document.getElementById("winMessage");
+const moveCounterEl = document.getElementById("moveCounter");
+const timerEl = document.getElementById("timer");
 
-let puzzle = [];
 const size = 3;
+let tiles = [];
+let state = [];
+let moves = 0;
+let timer = 0;
+let timerInterval = null;
 
-function initPuzzle(imageSrc) {
-    if (!puzzleBoard) return;
+function startTimer() {
+    clearInterval(timerInterval);
+    timer = 0;
+    timerEl.textContent = timer;
+    timerInterval = setInterval(() => {
+        timer++;
+        timerEl.textContent = timer;
+    }, 1000);
+}
 
-    puzzleBoard.innerHTML = "";
-    puzzle = [];
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function createSolvedState() {
+    state = [];
+    for (let i = 0; i < size * size; i++) {
+        state.push(i);
+    }
+}
+
+function createBoard(imageSrc) {
+    board.innerHTML = "";
+    tiles = [];
 
     for (let i = 0; i < size * size; i++) {
         const tile = document.createElement("div");
@@ -108,49 +136,35 @@ function initPuzzle(imageSrc) {
 
         if (i === size * size - 1) {
             tile.classList.add("empty");
-            tile.dataset.value = "empty";
         } else {
             const x = (i % size) * -120;
             const y = Math.floor(i / size) * -120;
-
             tile.style.backgroundImage = `url(${imageSrc})`;
             tile.style.backgroundPosition = `${x}px ${y}px`;
-            tile.dataset.value = i;
         }
 
-        tile.addEventListener("click", function () {
-            const index = puzzle.indexOf(this);
-            moveTile(index);
-        });
-
-        puzzle.push(tile);
-        puzzleBoard.appendChild(tile);
+        tile.dataset.value = i;
+        tile.addEventListener("click", () => moveTile(i));
+        tiles.push(tile);
+        board.appendChild(tile);
     }
 
-    if (winMessage) winMessage.textContent = "";
+    createSolvedState();
+    moves = 0;
+    moveCounterEl.textContent = moves;
+    winMessage.textContent = "";
+    stopTimer();
 }
 
-function moveTile(index) {
-    const emptyIndex = puzzle.findIndex(t => t.dataset.value === "empty");
-
-    if (isAdjacent(index, emptyIndex)) {
-        [puzzle[index], puzzle[emptyIndex]] =
-            [puzzle[emptyIndex], puzzle[index]];
-
-        renderPuzzle();
-
-        if (checkWin()) {
-            if (winMessage) {
-                winMessage.textContent =
-                    "You solved it 💙 Our memories always fit together.";
-            }
-        }
-    }
+function render() {
+    board.innerHTML = "";
+    state.forEach(value => {
+        board.appendChild(tiles[value]);
+    });
 }
 
-function renderPuzzle() {
-    puzzleBoard.innerHTML = "";
-    puzzle.forEach(tile => puzzleBoard.appendChild(tile));
+function getEmptyIndex() {
+    return state.indexOf(size * size - 1);
 }
 
 function isAdjacent(i1, i2) {
@@ -158,38 +172,99 @@ function isAdjacent(i1, i2) {
     const c1 = i1 % size;
     const r2 = Math.floor(i2 / size);
     const c2 = i2 % size;
-
     return Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1;
 }
 
-function shufflePuzzle() {
-    for (let i = 0; i < 200; i++) {
-        const emptyIndex = puzzle.findIndex(t => t.dataset.value === "empty");
-        const neighbors = puzzle
-            .map((_, i) => i)
-            .filter(i => isAdjacent(i, emptyIndex));
+function moveTile(index) {
+    const tilePos = state.indexOf(index);
+    const emptyPos = getEmptyIndex();
 
-        const random =
+    if (isAdjacent(tilePos, emptyPos)) {
+        [state[tilePos], state[emptyPos]] =
+            [state[emptyPos], state[tilePos]];
+
+        render();
+
+        moves++;
+        moveCounterEl.textContent = moves;
+
+        if (moves === 1) startTimer();
+
+        if (checkWin()) {
+            stopTimer();
+            winMessage.textContent = "You solved it 💙 Perfect match!";
+            launchConfetti();
+        }
+    }
+}
+
+function shuffle() {
+    for (let i = 0; i < 200; i++) {
+        const emptyPos = getEmptyIndex();
+        const neighbors = state
+            .map((_, i) => i)
+            .filter(i => isAdjacent(i, emptyPos));
+
+        const rand =
             neighbors[Math.floor(Math.random() * neighbors.length)];
 
-        [puzzle[random], puzzle[emptyIndex]] =
-            [puzzle[emptyIndex], puzzle[random]];
+        [state[rand], state[emptyPos]] =
+            [state[emptyPos], state[rand]];
     }
 
-    renderPuzzle();
-    if (winMessage) winMessage.textContent = "";
+    render();
+    moves = 0;
+    moveCounterEl.textContent = moves;
+    winMessage.textContent = "";
+    stopTimer();
 }
 
 function checkWin() {
-    for (let i = 0; i < puzzle.length - 1; i++) {
-        if (parseInt(puzzle[i].dataset.value) !== i) return false;
-    }
-    return true;
+    return state.every((val, index) => val === index);
 }
 
-if (shuffleBtn) {
-    shuffleBtn.addEventListener("click", shufflePuzzle);
+// Confetti
+function launchConfetti() {
+    const duration = 2000;
+    const end = Date.now() + duration;
+
+    const interval = setInterval(() => {
+        if (Date.now() > end) {
+            clearInterval(interval);
+            return;
+        }
+
+        const confetti = document.createElement("div");
+        confetti.style.position = "fixed";
+        confetti.style.width = "8px";
+        confetti.style.height = "8px";
+        confetti.style.background = `hsl(${Math.random()*360},100%,50%)`;
+        confetti.style.left = Math.random()*100 + "vw";
+        confetti.style.top = "-10px";
+        confetti.style.opacity = "1";
+        confetti.style.pointerEvents = "none";
+        confetti.style.transition = "transform 2s linear, opacity 2s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.style.transform = "translateY(100vh)";
+            confetti.style.opacity = "0";
+        }, 10);
+
+        setTimeout(() => confetti.remove(), 2000);
+
+    }, 20);
 }
 
-// Initialize puzzle with your image
-initPuzzle("ph1.jpg"); // change to you
+// Events
+shuffleBtn.addEventListener("click", shuffle);
+
+imageSelector.addEventListener("change", function () {
+    createBoard(this.value);
+    render();
+});
+
+// Init
+createBoard(imageSelector.value);
+render();
