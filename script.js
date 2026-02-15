@@ -83,3 +83,106 @@ selector.addEventListener('change', () => {
     player.src = selector.value;
     player.play();
 });
+
+
+// PUZZLE (Stable + Smooth)
+// ===============================
+
+const puzzleBoard = document.getElementById("puzzleBoard");
+const shuffleBtn = document.getElementById("shuffleBtn");
+const winMessage = document.getElementById("winMessage");
+
+let puzzle = [];
+const size = 3;
+
+function initPuzzle(imageSrc) {
+    if (!puzzleBoard) return;
+
+    puzzleBoard.innerHTML = "";
+    puzzle = [];
+
+    for (let i = 0; i < size * size; i++) {
+        const tile = document.createElement("div");
+        tile.classList.add("tile");
+
+        if (i === size * size - 1) {
+            tile.classList.add("empty");
+            tile.dataset.value = "empty";
+        } else {
+            const x = (i % size) * -120;
+            const y = Math.floor(i / size) * -120;
+
+            tile.style.backgroundImage = `url(${imageSrc})`;
+            tile.style.backgroundPosition = `${x}px ${y}px`;
+            tile.dataset.value = i;
+        }
+
+        tile.addEventListener("click", () => moveTile(i));
+        puzzle.push(tile);
+        puzzleBoard.appendChild(tile);
+    }
+
+    if (winMessage) winMessage.textContent = "";
+}
+
+function moveTile(index) {
+    const emptyIndex = puzzle.findIndex(t => t.dataset.value === "empty");
+    if (isAdjacent(index, emptyIndex)) {
+        [puzzle[index], puzzle[emptyIndex]] =
+            [puzzle[emptyIndex], puzzle[index]];
+
+        renderPuzzle();
+
+        if (checkWin()) {
+            if (winMessage) {
+                winMessage.textContent =
+                    "You solved it 💙 Our memories always fit together.";
+            }
+        }
+    }
+}
+
+function renderPuzzle() {
+    puzzleBoard.innerHTML = "";
+    puzzle.forEach(tile => puzzleBoard.appendChild(tile));
+}
+
+function isAdjacent(i1, i2) {
+    const r1 = Math.floor(i1 / size);
+    const c1 = i1 % size;
+    const r2 = Math.floor(i2 / size);
+    const c2 = i2 % size;
+    return Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1;
+}
+
+function shufflePuzzle() {
+    for (let i = 0; i < 200; i++) {
+        const emptyIndex = puzzle.findIndex(t => t.dataset.value === "empty");
+        const neighbors = puzzle
+            .map((_, i) => i)
+            .filter(i => isAdjacent(i, emptyIndex));
+
+        const random =
+            neighbors[Math.floor(Math.random() * neighbors.length)];
+
+        [puzzle[random], puzzle[emptyIndex]] =
+            [puzzle[emptyIndex], puzzle[random]];
+    }
+
+    renderPuzzle();
+    if (winMessage) winMessage.textContent = "";
+}
+
+function checkWin() {
+    for (let i = 0; i < puzzle.length - 1; i++) {
+        if (parseInt(puzzle[i].dataset.value) !== i) return false;
+    }
+    return true;
+}
+
+if (shuffleBtn) {
+    shuffleBtn.addEventListener("click", shufflePuzzle);
+}
+
+// Initialize puzzle with your image
+initPuzzle("ph1.jpg"); // change to you
