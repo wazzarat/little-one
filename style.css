@@ -1,66 +1,130 @@
+/* =========================
+   Base
+========================= */
+
 body {
     font-family: 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Section */
+
+/* =========================
+   Section Layout
+========================= */
+
 .section {
-    padding: 4rem 1rem;
-    max-width: 1100px;
+    padding: 5rem 1.5rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Titles */
+
+/* =========================
+   Titles
+========================= */
+
 .main-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 800;
-    color: #7F00FF;
+    color: #1e3a8a; /* deep blue */
 }
 
 .subtitle {
-    font-size: 1.2rem;
-    color: #6B21A8;
+    font-size: 1.4rem;
+    color: #3730a3; /* indigo-blue */
 }
 
-/* Card */
+
+/* =========================
+   Card System
+========================= */
+
 .card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    padding: 1.5rem;
+    background: #ffffff;
+    border-radius: 1.2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+    padding: 1.8rem;
     text-align: center;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+}
+
+.center-card {
+    max-width: 450px;
+    margin: 2.5rem auto;
 }
 
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
-.center-card {
-    max-width: 400px;
-    margin: 2rem auto;
+
+/* =========================
+   Memory Image Cards
+========================= */
+
+.image-card {
+    width: 280px;
 }
 
-/* Image */
 .image-card img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 0.75rem;
+    border-radius: 0.9rem;
 }
 
-/* Fade */
+.card-content {
+    margin-top: 0.8rem;
+}
+
+
+/* =========================
+   Letter Cards
+========================= */
+
+.letter-card {
+    cursor: pointer;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+.music-btn {
+    background: #2563eb; /* blue */
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.music-btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   Scroll Fade Animation
+========================= */
+
 .scroll-fade {
     opacity: 0;
-    transform: translateY(30px);
-    transition: 0.6s;
+    transform: translateY(40px);
+    transition: all 0.7s ease;
 }
 
 .scroll-fade.show {
@@ -68,16 +132,35 @@ body {
     transform: translateY(0);
 }
 
-/* Button */
-.music-btn {
-    background: #EC4899;
-    color: white;
-    padding: 0.75rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    cursor: pointer;
+
+/* =========================
+   Engagement Counter
+========================= */
+
+#engagementCounter {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-top: 0.5rem;
 }
 
-.music-btn:hover {
-    background: #DB2777;
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-card {
+        width: 100%;
+        max-width: 350px;
+    }
 }
