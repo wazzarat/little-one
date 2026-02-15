@@ -105,3 +105,78 @@ body {
     margin-top: 0.5rem;
 }
 
+.puzzle-section {
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+}
+
+.puzzle-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+#imageSelector {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.puzzle-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#puzzleBoard {
+    width: 360px;
+    height: 360px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
+    background: rgba(255,255,255,0.1);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.tile {
+    background-size: 360px 360px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.tile:hover {
+    transform: scale(1.04);
+}
+
+.empty {
+    background: transparent;
+    cursor: default;
+}
+
+#shuffleBtn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #00c6ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#shuffleBtn:hover {
+    background: #0072ff;
+}
+
+#winMessage {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #00ffcc;
+}
+
