@@ -2,78 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zanyar 💙 Nada</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Zanyar 💙 Nada</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+<body class="bg-gradient-to-b from-pink-100 via-purple-100 to-blue-100 font-sans text-gray-800">
 
-<body class="bg-gradient-to-b from-blue-300 via-blue-400 to-indigo-400 text-gray-900">
+    <!-- Main Title -->
+    <header class="text-center py-8">
+        <h1 class="main-title animate-fadeIn">Zanyar 💙 Nada</h1>
+        <p class="subtitle animate-fadeIn delay-200">Our Beautiful Journey</p>
+    </header>
 
-<header class="text-center py-8">
-    <h1 class="main-title">Zanyar 💙 Nada</h1>
-    <p class="subtitle">Our Beautiful Journey</p>
-</header>
-
-<div class="card center-card">
-    <h3>Choose a Song:</h3>
-
-    <select id="songSelector" class="music-btn w-full mt-2">
-        <option value="music.mp3">Song 1</option>
-        <option value="a.mp3">Song 2</option>
-    </select>
-
-    <audio id="audioPlayer" controls class="mt-4 w-full">
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <div class="center-card card">
+  <h3>Choose a Song:</h3>
+  <select id="songSelector" class="music-btn" title="Choose a song to play">
+    <option value="music.mp3">رۆ‌حی خۆم </option>
+    <option value="a.mp3">ئەحە گیان</option>
+      <option value="ho.mp3">چەندین گەڕام</option>
+  </select>
+  <audio id="audioPlayer" controls style="margin-top: 1rem; width: 100%;">
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 </div>
 
-<div class="card center-card scroll-fade">
-    <h2>Engaged Since</h2>
-    <p>25 / 12 / 2025 - 7:00 PM</p>
-    <h3 id="engagementCounter"></h3>
-</div>
 
-<section class="card center-card scroll-fade">
-    <h2 class="text-3xl font-bold text-center text-purple-700 mb-6">
-        Our Story
-    </h2>
+    <!-- Engagement Counter Card -->
+    <div class="card center-card animate-fadeIn delay-400 scroll-fade">
+        <h2>Engaged Since</h2>
+        <p>25 / 12 / 2025 - 7:00 PM</p>
+        <h3 id="engagementCounter"></h3>
+    </div>
 
+    <!-- Timeline -->
+    <section class="section">
+        <h2 class="text-3xl font-bold text-center text-purple-700 mb-6">Our Story</h2>
+        <div class="card-container">
+            <div class="card scroll-fade">
+                <h3>First Date</h3>
+                <p>12 / 12 / 2024</p>
+            </div>
+            <div class="card scroll-fade">
+                <h3>Engagement</h3>
+                <p>25 / 12 / 2025</p>
+            </div>
+            <div class="card scroll-fade">
+                <h3>Forever</h3>
+                <p>Still writing our story...</p>
+            </div>
+        </div>
+    </section>
+<!-- Memory Gallery -->
+<section class="section">
+    <h2 class="text-3xl font-bold text-center text-purple-700 mb-6">Our Memories</h2>
     <div class="card-container">
-        <div class="card scroll-fade">
-            <h3>First Date</h3>
-            <p>12 / 12 / 2024</p>
+        <div class="card image-card scroll-fade">
+            <img src="photo1.jpg" alt="Our First Smile">
+            <div class="card-content">
+                <h3>Our First Smile</h3>
+                <p>The beginning 💙</p>
+            </div>
         </div>
 
-        <div class="card scroll-fade">
-            <h3>Engagement</h3>
-            <p>25 / 12 / 2025</p>
+        <div class="card image-card scroll-fade">
+            <img src="photo2.jpg" alt="Beautiful Day">
+            <div class="card-content">
+                <h3>Beautiful Day</h3>
+                <p>Unforgettable moment</p>
+            </div>
         </div>
 
-        <div class="card scroll-fade">
-            <h3>Forever</h3>
-            <p>Still writing our story...</p>
+        <div class="card image-card scroll-fade">
+            <img src="SH.jpg" alt="emptying my pockets💸">
+            <div class="card-content">
+                <h3>First Shopping</h3>
+                <p>And emptying my pockets💸</p>
+            </div>
+        </div>
+
+        <div class="card image-card scroll-fade">
+            <img src="FF.jpg" alt="Being officially formal">
+            <div class="card-content">
+                <h3>Being officially formal</h3>
+                <p>8/1/2026</p>
+            </div>
+        </div>
+
+        <div class="card image-card scroll-fade">
+            <img src="photo3.jpg" alt="Forever Us">
+            <div class="card-content">
+                <h3>Forever Us</h3>
+                <p>My favorite person</p>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="card center-card scroll-fade">
-    <h2 class="text-3xl font-bold text-center text-purple-700 mb-6">
-        Our Memories
-    </h2>
-
-    <div class="card-container">
-        <div class="card image-card scroll-fade">
-            <img src="photo1.jpg">
+    <!-- Open When Letters -->
+    <section class="section">
+        <h2 class="text-3xl font-bold text-center text-purple-700 mb-6">Open When...</h2>
+        <div class="card-container">
+            <div class="card letter-card scroll-fade" onclick="openLetter('sad')">
+                <h3>You feel sad</h3>
+            </div>
+            <div class="card letter-card scroll-fade" onclick="openLetter('miss')">
+                <h3>You miss me</h3>
+            </div>
+            <div class="card letter-card scroll-fade" onclick="openLetter('happy')">
+                <h3>You feel happy</h3>
+            </div>
         </div>
-
-        <div class="card image-card scroll-fade">
-            <img src="photo2.jpg">
+        <div class="card center-card scroll-fade">
+            <p id="letterText"></p>
         </div>
+    </section>
+
+    <!-- Music Button -->
+    <div class="text-center mb-12 scroll-fade">
+        <button class="music-btn" onclick="toggleMusic()">Play Music 💙</button>
+        <audio id="bgMusic" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
     </div>
-</section>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
