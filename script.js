@@ -10,6 +10,14 @@
     }
 })();
 
+const nadaName = document.getElementById("nadaName");
+const secretBox = document.getElementById("secretMessageBox");
+const secretText = document.getElementById("secretMessageText");
+
+nadaName.addEventListener("click", () => {
+    secretBox.style.display = "block"; // show the hidden card
+    secretText.textContent = "💖 Hey Nada, I love you endlessly 💖";
+});
 
 
 function updateEngagementCounter() {
